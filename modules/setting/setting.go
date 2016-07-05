@@ -22,10 +22,10 @@ var (
 )
 
 func init() {
-    AppPath, err := executablePath()
+    var err error
 
-    if err != nil {
-        log.Fatalf("Fail to get app path: %v", err)
+    if AppPath, err = executablePath(); err != nil {
+        log.Fatalf("Fail to get app path: %v\n", err)
     }
 
     AppPath = strings.Replace(AppPath, "\\", "/", -1)
@@ -41,7 +41,7 @@ func executablePath() (string, error) {
     return filepath.Abs(file)
 }
 
-func appDirectory() (string, error) {
+func AppDirectory() (string, error) {
     i := strings.LastIndex(AppPath, "/")
 
     if i == -1 {
@@ -52,7 +52,7 @@ func appDirectory() (string, error) {
 }
 
 func NewSetting() {
-    appDirectory, err := appDirectory()
+    appDirectory, err := AppDirectory()
 
     if err != nil {
         log.Fatalf("Fail to get application directory: %v", err)

@@ -66,7 +66,8 @@ func runWeb(ctx *cli.Context) error {
     //
     addr := fmt.Sprintf("%s:%s", setting.Address, setting.Port)
 
-    log.Infof("Listen: http://%s", addr)
+    log.Infof("Listen : http://%s", addr)
+    log.Infof("AppPath: %s", setting.AppPath)
 
     if err := http.ListenAndServe(addr, m); err != nil {
         log.Fatalf("Fail to start server: %v", err)
