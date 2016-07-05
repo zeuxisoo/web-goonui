@@ -1,2 +1,5 @@
 package: github.com/zeuxisoo/go-goonui
-import: []
+import:
+- package: github.com/codegangsta/cli
+- package: gopkg.in/macaron.v1
+- package: github.com/Sirupsen/logrus

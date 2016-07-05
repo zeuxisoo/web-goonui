@@ -1,0 +1,16 @@
+hash: 7b40d1c7f82ed6011fa3433859f67d1219f0750fead6e205d9f6401f0fe7cc17
+updated: 2016-07-05T13:09:50.624540407+08:00
+imports:
+- name: github.com/codegangsta/cli
+  version: 1efa31f08b9333f1bd4882d61f9d668a70cd902e
+- name: github.com/go-macaron/inject
+  version: d8a0b8677191f4380287cfebd08e462217bac7ad
+- name: github.com/Sirupsen/logrus
+  version: f3cfb454f4c209e6668c95216c4744b8fddb2356
+- name: github.com/Unknwon/com
+  version: 28b053d5a2923b87ce8c5a08f3af779894a72758
+- name: gopkg.in/ini.v1
+  version: d84ec27dc16c761f6dea7636e6162ff831b771b1
+- name: gopkg.in/macaron.v1
+  version: 94a5ef7105036242f79e5e07a8eb8651d06c8533
+devImports: []
