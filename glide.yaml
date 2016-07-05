@@ -4,3 +4,5 @@ import:
 - package: gopkg.in/macaron.v1
 - package: github.com/Sirupsen/logrus
 - package: gopkg.in/ini.v1
+- package: github.com/go-macaron/pongo2
+- package: gopkg.in/flosch/pongo2.v3

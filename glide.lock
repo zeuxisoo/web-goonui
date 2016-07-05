@@ -1,10 +1,12 @@
-hash: 5e25a4cb6ff4bdf10c3ae3e3b172c6de7ddff4e91bd47c485ae9917b81b13007
-updated: 2016-07-05T14:31:20.218692261+08:00
+hash: 31f5165084e36ccfd71da9859911d32264bc8e28f117e86a2a9a1716b099ea22
+updated: 2016-07-05T16:11:01.749751459+08:00
 imports:
 - name: github.com/codegangsta/cli
   version: 1efa31f08b9333f1bd4882d61f9d668a70cd902e
 - name: github.com/go-macaron/inject
   version: d8a0b8677191f4380287cfebd08e462217bac7ad
+- name: github.com/go-macaron/pongo2
+  version: b9b1ee57954e1242dae72eb28ba078e04f6c9284
 - name: github.com/Sirupsen/logrus
   version: f3cfb454f4c209e6668c95216c4744b8fddb2356
 - name: github.com/Unknwon/com
@@ -13,6 +15,8 @@ imports:
   version: a408501be4d17ee978c04a618e7a1b22af058c0e
   subpackages:
   - unix
+- name: gopkg.in/flosch/pongo2.v3
+  version: 5e81b817a0c48c1c57cdf1a9056cf76bdee02ca9
 - name: gopkg.in/ini.v1
   version: d84ec27dc16c761f6dea7636e6162ff831b771b1
 - name: gopkg.in/macaron.v1

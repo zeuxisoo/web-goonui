@@ -3,18 +3,21 @@ package cmd
 
 import (
     "fmt"
+    "path"
     "net/http"
 
     "github.com/codegangsta/cli"
 
     "gopkg.in/macaron.v1"
+    "github.com/go-macaron/pongo2"
 
     "github.com/zeuxisoo/go-goonui/modules/setting"
     "github.com/zeuxisoo/go-goonui/modules/log"
+    "github.com/zeuxisoo/go-goonui/routes"
 )
 
 var CmdWeb = cli.Command{
-    Name       : "serve",
+    Name       : "web",
     Usage      : "Start goon ui server",
     Description: `Goon ui is the only thing you need to run`,
     Action     : runWeb,
@@ -38,9 +41,27 @@ func runWeb(ctx *cli.Context) error {
 
     //
     m := macaron.New()
-    m.Get("/", func() string {
-        return "Hello world!"
-    })
+    m.Use(macaron.Logger())
+    m.Use(macaron.Recovery())
+
+    m.Use(macaron.Static(
+        path.Join(setting.StaticRootPath, "public"),
+        macaron.StaticOptions{
+            SkipLogging: false,
+        },
+    ))
+
+    m.Use(pongo2.Pongoer(pongo2.Options{
+        Directory      : path.Join(setting.StaticRootPath, "templates"),
+        Extensions     : []string{ ".tmpl", ".html" },
+        Charset        : "UTF-8",
+        IndentJSON     : true,
+        IndentXML      : true,
+        HTMLContentType: "text/html",
+    }))
+
+    //
+    m.Get("/", routes.Home)
 
     //
     addr := fmt.Sprintf("%s:%s", setting.Address, setting.Port)
