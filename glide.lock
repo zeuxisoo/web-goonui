@@ -1,5 +1,5 @@
-hash: 7b40d1c7f82ed6011fa3433859f67d1219f0750fead6e205d9f6401f0fe7cc17
-updated: 2016-07-05T13:09:50.624540407+08:00
+hash: 5e25a4cb6ff4bdf10c3ae3e3b172c6de7ddff4e91bd47c485ae9917b81b13007
+updated: 2016-07-05T14:31:20.218692261+08:00
 imports:
 - name: github.com/codegangsta/cli
   version: 1efa31f08b9333f1bd4882d61f9d668a70cd902e
@@ -9,6 +9,10 @@ imports:
   version: f3cfb454f4c209e6668c95216c4744b8fddb2356
 - name: github.com/Unknwon/com
   version: 28b053d5a2923b87ce8c5a08f3af779894a72758
+- name: golang.org/x/sys
+  version: a408501be4d17ee978c04a618e7a1b22af058c0e
+  subpackages:
+  - unix
 - name: gopkg.in/ini.v1
   version: d84ec27dc16c761f6dea7636e6162ff831b771b1
 - name: gopkg.in/macaron.v1

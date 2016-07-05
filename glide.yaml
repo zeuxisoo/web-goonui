@@ -3,3 +3,4 @@ import:
 - package: github.com/codegangsta/cli
 - package: gopkg.in/macaron.v1
 - package: github.com/Sirupsen/logrus
+- package: gopkg.in/ini.v1

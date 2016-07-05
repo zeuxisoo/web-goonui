@@ -20,7 +20,7 @@ var CmdWeb = cli.Command{
     Action     : runWeb,
     Flags      : []cli.Flag{
         stringFlag("address, a", "127.0.0.1", "Custom address for server"),
-        intFlag("port, p", 8080, "Custom port for server"),
+        stringFlag("port, p", "8080", "Custom port for server"),
     },
 }
 
@@ -33,7 +33,7 @@ func runWeb(ctx *cli.Context) error {
     }
 
     if ctx.IsSet("port") {
-        setting.Port = ctx.Int("port")
+        setting.Port = ctx.String("port")
     }
 
     //
@@ -43,7 +43,7 @@ func runWeb(ctx *cli.Context) error {
     })
 
     //
-    addr := fmt.Sprintf("%s:%d", setting.Address, setting.Port)
+    addr := fmt.Sprintf("%s:%s", setting.Address, setting.Port)
 
     log.Infof("Listen: http://%s", addr)
 
