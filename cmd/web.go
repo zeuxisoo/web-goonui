@@ -13,6 +13,7 @@ import (
 
     "github.com/zeuxisoo/go-goonui/modules/setting"
     "github.com/zeuxisoo/go-goonui/modules/log"
+    "github.com/zeuxisoo/go-goonui/modules/context"
     "github.com/zeuxisoo/go-goonui/routes"
 )
 
@@ -59,6 +60,8 @@ func runWeb(ctx *cli.Context) error {
         IndentXML      : true,
         HTMLContentType: "text/html",
     }))
+
+    m.Use(context.Contexter())
 
     //
     m.Get("/", routes.Home)

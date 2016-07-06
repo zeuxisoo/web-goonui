@@ -1,9 +1,9 @@
 package routes
 
 import (
-    "gopkg.in/macaron.v1"
+    "github.com/zeuxisoo/go-goonui/modules/context"
 )
 
-func Home(ctx *macaron.Context) {
+func Home(ctx *context.Context) {
     ctx.HTML(200, "index")
 }
