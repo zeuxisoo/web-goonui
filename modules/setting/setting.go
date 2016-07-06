@@ -58,7 +58,7 @@ func NewSetting() {
         log.Fatalf("Fail to get application directory: %v", err)
     }
 
-    Configure, err := ini.Load("conf/app.ini")
+    Configure, err = ini.Load("conf/app.ini")
 
     if err != nil {
         log.Fatalf("Fail to parse 'conf/app.ini': %v", err)
