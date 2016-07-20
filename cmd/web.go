@@ -65,6 +65,7 @@ func runWeb(ctx *cli.Context) error {
 
     //
     m.Get("/", routes.Home)
+    m.Post("/signin", routes.DoSignIn)
 
     //
     addr := fmt.Sprintf("%s:%s", setting.Address, setting.Port)

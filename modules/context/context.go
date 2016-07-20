@@ -1,7 +1,11 @@
 package context
 
 import (
+    "strings"
+
     "gopkg.in/macaron.v1"
+
+    "github.com/zeuxisoo/go-goonui/modules/setting"
 )
 
 type Context struct {
@@ -17,6 +21,8 @@ func Contexter() macaron.Handler {
         ctx := &Context{
             Context: c,
         }
+
+        ctx.Data["Link"] = setting.AppUrl + strings.TrimSuffix(ctx.Req.URL.Path, "/")
 
         c.Map(ctx)
     }
