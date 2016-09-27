@@ -1,24 +1,32 @@
-hash: 31f5165084e36ccfd71da9859911d32264bc8e28f117e86a2a9a1716b099ea22
-updated: 2016-07-05T16:11:01.749751459+08:00
+hash: 84406b12ef8f9e1e7c9d428498cf1a9bffa7109378ad010c121faad612f2e138
+updated: 2016-09-27T15:07:57.037659412+08:00
 imports:
 - name: github.com/codegangsta/cli
-  version: 1efa31f08b9333f1bd4882d61f9d668a70cd902e
+  version: d53eb991652b1d438abdd34ce4bfa3ef1539108e
 - name: github.com/go-macaron/inject
   version: d8a0b8677191f4380287cfebd08e462217bac7ad
 - name: github.com/go-macaron/pongo2
   version: b9b1ee57954e1242dae72eb28ba078e04f6c9284
+- name: github.com/jinzhu/gorm
+  version: 5174cc5c242a728b435ea2be8a2f7f998e15429b
+  subpackages:
+  - dialects/sqlite
+- name: github.com/jinzhu/inflection
+  version: 74387dc39a75e970e7a3ae6a3386b5bd2e5c5cff
+- name: github.com/mattn/go-sqlite3
+  version: 4b0af852c17164dce48e6754e3094c55192e4934
 - name: github.com/Sirupsen/logrus
-  version: f3cfb454f4c209e6668c95216c4744b8fddb2356
+  version: 3ec0642a7fb6488f65b06f9040adc67e3990296a
 - name: github.com/Unknwon/com
   version: 28b053d5a2923b87ce8c5a08f3af779894a72758
 - name: golang.org/x/sys
-  version: a408501be4d17ee978c04a618e7a1b22af058c0e
+  version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
   subpackages:
   - unix
 - name: gopkg.in/flosch/pongo2.v3
   version: 5e81b817a0c48c1c57cdf1a9056cf76bdee02ca9
 - name: gopkg.in/ini.v1
-  version: d84ec27dc16c761f6dea7636e6162ff831b771b1
+  version: 6e4869b434bd001f6983749881c7ead3545887d8
 - name: gopkg.in/macaron.v1
-  version: 94a5ef7105036242f79e5e07a8eb8651d06c8533
-devImports: []
+  version: 4974334b10dbb6f5c0e17f4c10555ff050a16329
+testImports: []

@@ -12,6 +12,7 @@ import (
     "github.com/go-macaron/pongo2"
 
     "github.com/zeuxisoo/go-goonui/modules/setting"
+    "github.com/zeuxisoo/go-goonui/modules/models"
     "github.com/zeuxisoo/go-goonui/modules/log"
     "github.com/zeuxisoo/go-goonui/modules/context"
     "github.com/zeuxisoo/go-goonui/routes"
@@ -30,6 +31,13 @@ var CmdWeb = cli.Command{
 
 func runWeb(ctx *cli.Context) error {
     setting.NewSetting()
+
+    //
+    models.LoadConfigs()
+
+    if err := models.NewDB(); err != nil {
+        log.Fatalf("Failed to initialize ORM engine: %v", err)
+    }
 
     //
     if ctx.IsSet("address") {

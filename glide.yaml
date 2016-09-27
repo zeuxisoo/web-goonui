@@ -6,3 +6,8 @@ import:
 - package: gopkg.in/ini.v1
 - package: github.com/go-macaron/pongo2
 - package: gopkg.in/flosch/pongo2.v3
+- package: github.com/jinzhu/gorm
+  version: ^1.0.0
+  subpackages:
+  - dialects/sqlite
+- package: github.com/jinzhu/inflection
