@@ -1,5 +1,5 @@
-hash: 84406b12ef8f9e1e7c9d428498cf1a9bffa7109378ad010c121faad612f2e138
-updated: 2016-09-27T15:07:57.037659412+08:00
+hash: e630c5e53fac7cc20ae84ed19306ade3c6317999d44a781c43b8eb61a68a059f
+updated: 2016-09-29T15:01:43.669032788+08:00
 imports:
 - name: github.com/codegangsta/cli
   version: d53eb991652b1d438abdd34ce4bfa3ef1539108e
@@ -19,6 +19,10 @@ imports:
   version: 3ec0642a7fb6488f65b06f9040adc67e3990296a
 - name: github.com/Unknwon/com
   version: 28b053d5a2923b87ce8c5a08f3af779894a72758
+- name: golang.org/x/crypto
+  version: 7ac97ebec9cb7ab8b44b571f6ec4cee333dc4309
+  subpackages:
+  - bcrypt
 - name: golang.org/x/sys
   version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
   subpackages:

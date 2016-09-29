@@ -10,10 +10,11 @@ import (
     _ "github.com/jinzhu/gorm/dialects/sqlite"
 
     "github.com/zeuxisoo/go-goonui/modules/setting"
+    "github.com/zeuxisoo/go-goonui/models/migrations"
 )
 
 var (
-    db  *gorm.DB
+    db *gorm.DB
 
     DBConfigure struct {
         Driver      string
@@ -22,6 +23,7 @@ var (
         Password    string
         Name        string
         SSLMode     string
+        LogMode     bool
     }
 )
 
@@ -34,6 +36,22 @@ func LoadConfigs() {
     DBConfigure.Password = section.Key("PASSWORD").String()
     DBConfigure.Name     = section.Key("NAME").String()
     DBConfigure.SSLMode  = section.Key("SSLMODE").String()
+    DBConfigure.LogMode  = section.Key("LOG_MODE").MustBool(false)
+}
+
+func CreateDatabase() {
+    var tables []interface{}
+
+    tables = append(
+        tables,
+        new(User),
+    )
+
+    for _, table := range tables {
+        if err := db.AutoMigrate(table).Error; err != nil {
+            fmt.Errorf("Failed to create table schema: %v", err)
+        }
+    }
 }
 
 func getDB() (*gorm.DB, error) {
@@ -77,6 +95,8 @@ func SetDB() (err error) {
         return fmt.Errorf("Cannot connect to database: %v", err)
     }
 
+    db.LogMode(DBConfigure.LogMode)
+
     return nil
 }
 
@@ -86,6 +106,9 @@ func NewDB() (err error) {
     }
 
     // db.AutoMigrate()
+    if err = migrations.Migrate(db); err != nil {
+        return fmt.Errorf("migrate: %v", err)
+    }
 
     return nil
 }

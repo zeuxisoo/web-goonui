@@ -11,3 +11,8 @@ clean:
 
 dev-server: clean
 	@bra run
+
+dev-install: clean
+	go install
+	go build
+	./go-goonui install

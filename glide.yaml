@@ -11,3 +11,6 @@ import:
   subpackages:
   - dialects/sqlite
 - package: github.com/jinzhu/inflection
+- package: golang.org/x/crypto
+  subpackages:
+  - bcrypt
