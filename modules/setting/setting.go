@@ -8,8 +8,10 @@ import (
     "strings"
 
     "gopkg.in/ini.v1"
+    "github.com/go-macaron/session"
 
     "github.com/zeuxisoo/go-goonui/modules/log"
+    "github.com/zeuxisoo/go-goonui/modules/helper"
 )
 
 var (
@@ -24,7 +26,13 @@ var (
 
     StaticRootPath  string
 
-    Configure   *ini.File
+    SecretKey       string
+
+    SessionConfig   session.Options
+
+    CsrfCookieName  string
+
+    Configure       *ini.File
 )
 
 func init() {
@@ -58,6 +66,7 @@ func AppDirectory() (string, error) {
 }
 
 func NewSetting() {
+    // Load configuration file
     appDirectory, err := AppDirectory()
 
     if err != nil {
@@ -70,9 +79,10 @@ func NewSetting() {
         log.Fatalf("Fail to parse 'conf/app.ini': %v", err)
     }
 
+    // Server configuration
     sectionServer := Configure.Section("server")
 
-    // Set AppUrl
+    // => Set AppUrl
     AppUrl = sectionServer.Key("ROOT_URL").MustString("http://localhost:8080/")
 
     if AppUrl[len(AppUrl)-1] != '/' {
@@ -88,8 +98,29 @@ func NewSetting() {
     AppSubUrl      = strings.TrimSuffix(url.Path, "/")
     AppSubUrlDepth = strings.Count(AppSubUrl, "/")
 
-    // Set others
+    // => Set others
     Address        = sectionServer.Key("ADDRESS").MustString("127.0.0.1")
     Port           = sectionServer.Key("PORT").MustString("8080")
     StaticRootPath = sectionServer.Key("STATIC_ROOT_PATH").MustString(appDirectory)
+
+    // Security configuration
+    sectionSecurity := Configure.Section("security")
+
+    SecretKey      = sectionSecurity.Key("SECRET_KEY").MustString(helper.GetRandomString(15))
+    CsrfCookieName = sectionSecurity.Key("CSRF_COOKIE_NAME").MustString("_csrf")
+}
+
+func NewSessionService() {
+    sessionSection := Configure.Section("session")
+
+    providerConfig := sessionSection.Key("PROVIDER_CONFIG").String()
+    providerConfig  = strings.Trim(providerConfig, "\" ")
+
+    SessionConfig.Provider       = sessionSection.Key("PROVIDER").In("memory", []string{"memory", "file", "redis", "mysql"})
+    SessionConfig.ProviderConfig = providerConfig
+    SessionConfig.CookieName     = sessionSection.Key("COOKIE_NAME").MustString("goonui")
+    SessionConfig.CookiePath     = AppSubUrl
+    SessionConfig.Secure         = sessionSection.Key("COOKIE_SECURE").MustBool()
+    SessionConfig.Gclifetime     = sessionSection.Key("GC_INTERVAL_TIME").MustInt64(86400)
+    SessionConfig.Maxlifetime    = sessionSection.Key("SESSION_LIFE_TIME").MustInt64(86400)
 }

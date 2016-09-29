@@ -1,0 +1,16 @@
+{% extends "../layout/frontend.html" %}
+
+{% block container %}
+    <div id="status">
+        <div class="panel panel-default">
+            <div class="panel-heading">Internal Server Error</div>
+            <div class="panel-body">
+                Something went wrong on our servers while we were processing your request. An error has occurred and this resource cannot be displayed.
+
+                {% if ErrorMessage %}
+                    <p>An error has occurred : {{ ErrorMessage }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

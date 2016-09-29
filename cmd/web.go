@@ -8,6 +8,8 @@ import (
     "github.com/codegangsta/cli"
 
     "gopkg.in/macaron.v1"
+    "github.com/go-macaron/session"
+    "github.com/go-macaron/csrf"
     "github.com/go-macaron/pongo2"
 
     "github.com/zeuxisoo/go-goonui/modules/setting"
@@ -30,6 +32,7 @@ var CmdWeb = cli.Command{
 
 func runWeb(ctx *cli.Context) error {
     setting.NewSetting()
+    setting.NewSessionService()
 
     //
     models.LoadConfigs()
@@ -68,17 +71,28 @@ func runWeb(ctx *cli.Context) error {
         HTMLContentType: "text/html",
     }))
 
+    m.Use(session.Sessioner(setting.SessionConfig))
+
+    m.Use(csrf.Csrfer(csrf.Options{
+        Secret    : setting.SecretKey,
+        Cookie    : setting.CsrfCookieName,
+        SetCookie : true,
+        Header    : "X-Csrf-Token",
+        CookiePath: setting.AppSubUrl,
+    }))
+
     m.Use(context.Contexter())
 
     //
     m.Get("/", routes.Home)
-    m.Post("/signin", routes.DoSignIn)
+    m.Post("/signin", csrf.Validate, routes.DoSignIn)
 
     //
     addr := fmt.Sprintf("%s:%s", setting.Address, setting.Port)
 
-    log.Infof("Listen : http://%s", addr)
-    log.Infof("AppPath: %s", setting.AppPath)
+    log.Infof("Listen   : http://%s", addr)
+    log.Infof("AppPath  : %s", setting.AppPath)
+    log.Infof("SecretKey: %s", setting.SecretKey)
 
     if err := http.ListenAndServe(addr, m); err != nil {
         log.Fatalf("Fail to start server: %v", err)
