@@ -5,7 +5,7 @@ import (
 
     "github.com/codegangsta/cli"
 
-    "github.com/zeuxisoo/go-goonui/cmd"
+    "github.com/zeuxisoo/go-goonui/app/console"
 )
 
 const APP_VER = "0.1.0"
@@ -16,8 +16,8 @@ func main() {
     app.Usage = "Goon user interface"
     app.Version = APP_VER
     app.Commands = []cli.Command{
-        cmd.CmdWeb,
-        cmd.CmdInstall,
+        console.CmdWeb,
+        console.CmdInstall,
     }
     app.Flags = append(app.Flags, []cli.Flag{}...)
     app.Run(os.Args)

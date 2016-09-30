@@ -5,7 +5,7 @@ import (
 
     "github.com/jinzhu/gorm"
 
-    "github.com/zeuxisoo/go-goonui/modules/log"
+    "github.com/zeuxisoo/go-goonui/app/kernels/log"
 )
 
 // Migration version table

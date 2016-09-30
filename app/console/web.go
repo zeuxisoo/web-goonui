@@ -1,4 +1,4 @@
-package cmd
+package console
 
 import (
     "fmt"
@@ -12,11 +12,11 @@ import (
     "github.com/go-macaron/csrf"
     "github.com/go-macaron/pongo2"
 
-    "github.com/zeuxisoo/go-goonui/modules/setting"
-    "github.com/zeuxisoo/go-goonui/modules/log"
-    "github.com/zeuxisoo/go-goonui/modules/context"
-    "github.com/zeuxisoo/go-goonui/models"
-    "github.com/zeuxisoo/go-goonui/routes"
+    "github.com/zeuxisoo/go-goonui/app/kernels/setting"
+    "github.com/zeuxisoo/go-goonui/app/kernels/log"
+    "github.com/zeuxisoo/go-goonui/app/kernels/context"
+    "github.com/zeuxisoo/go-goonui/app/models"
+    "github.com/zeuxisoo/go-goonui/app/routes"
 )
 
 var CmdWeb = cli.Command{
@@ -63,7 +63,7 @@ func runWeb(ctx *cli.Context) error {
     ))
 
     m.Use(pongo2.Pongoer(pongo2.Options{
-        Directory      : path.Join(setting.StaticRootPath, "templates"),
+        Directory      : path.Join(setting.StaticRootPath, "app/templates"),
         Extensions     : []string{ ".tmpl", ".html" },
         Charset        : "UTF-8",
         IndentJSON     : true,

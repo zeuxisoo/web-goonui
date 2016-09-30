@@ -10,8 +10,8 @@ import (
     "gopkg.in/ini.v1"
     "github.com/go-macaron/session"
 
-    "github.com/zeuxisoo/go-goonui/modules/log"
-    "github.com/zeuxisoo/go-goonui/modules/helper"
+    "github.com/zeuxisoo/go-goonui/app/kernels/log"
+    "github.com/zeuxisoo/go-goonui/app/helpers"
 )
 
 var (
@@ -106,7 +106,7 @@ func NewSetting() {
     // Security configuration
     sectionSecurity := Configure.Section("security")
 
-    SecretKey      = sectionSecurity.Key("SECRET_KEY").MustString(helper.GetRandomString(15))
+    SecretKey      = sectionSecurity.Key("SECRET_KEY").MustString(helpers.GetRandomString(15))
     CsrfCookieName = sectionSecurity.Key("CSRF_COOKIE_NAME").MustString("_csrf")
 }
 

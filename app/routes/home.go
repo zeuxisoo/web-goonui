@@ -1,8 +1,8 @@
 package routes
 
 import (
-    "github.com/zeuxisoo/go-goonui/modules/context"
-    "github.com/zeuxisoo/go-goonui/modules/setting"
+    "github.com/zeuxisoo/go-goonui/app/kernels/context"
+    "github.com/zeuxisoo/go-goonui/app/kernels/setting"
 )
 
 func Home(ctx *context.Context) {

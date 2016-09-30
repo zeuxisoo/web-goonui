@@ -1,11 +1,11 @@
-package cmd
+package console
 
 import (
     "github.com/codegangsta/cli"
 
-    "github.com/zeuxisoo/go-goonui/modules/setting"
-    "github.com/zeuxisoo/go-goonui/modules/log"
-    "github.com/zeuxisoo/go-goonui/models"
+    "github.com/zeuxisoo/go-goonui/app/kernels/setting"
+    "github.com/zeuxisoo/go-goonui/app/kernels/log"
+    "github.com/zeuxisoo/go-goonui/app/models"
 )
 
 var CmdInstall = cli.Command{

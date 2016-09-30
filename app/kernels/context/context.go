@@ -9,7 +9,7 @@ import (
     "github.com/go-macaron/csrf"
     "github.com/go-macaron/session"
 
-    "github.com/zeuxisoo/go-goonui/modules/setting"
+    "github.com/zeuxisoo/go-goonui/app/kernels/setting"
 )
 
 type Context struct {

@@ -9,8 +9,8 @@ import (
 
     _ "github.com/jinzhu/gorm/dialects/sqlite"
 
-    "github.com/zeuxisoo/go-goonui/modules/setting"
-    "github.com/zeuxisoo/go-goonui/models/migrations"
+    "github.com/zeuxisoo/go-goonui/app/kernels/setting"
+    "github.com/zeuxisoo/go-goonui/app/models/migrations"
 )
 
 var (
