@@ -1,8 +1,10 @@
-hash: ea9b5d6916045a049da0a63d3038539caddad9b3a39ee71bc90f193f5e52b4e5
-updated: 2016-09-29T16:37:44.87319185+08:00
+hash: 6e575bc164078ceebb9bc39b97f09a23fa9c9bc8cfb2dcda2d7d58bb603333d7
+updated: 2016-10-03T12:24:48.66976574+08:00
 imports:
 - name: github.com/codegangsta/cli
   version: d53eb991652b1d438abdd34ce4bfa3ef1539108e
+- name: github.com/go-macaron/binding
+  version: 9440f336b443056c90d7d448a0a55ad8c7599880
 - name: github.com/go-macaron/csrf
   version: 6a9a7df172cc1fcd81e4585f44b09200b6087cc0
 - name: github.com/go-macaron/inject
@@ -24,7 +26,7 @@ imports:
 - name: github.com/Unknwon/com
   version: 28b053d5a2923b87ce8c5a08f3af779894a72758
 - name: golang.org/x/crypto
-  version: 7ac97ebec9cb7ab8b44b571f6ec4cee333dc4309
+  version: 84e98f45760e87786b7f24603b8166a6fa09811d
   subpackages:
   - bcrypt
   - blowfish

@@ -20,6 +20,19 @@ type Context struct {
     Session session.Store
 }
 
+func (c *Context) HasError() bool {
+    hasErr, ok := c.Data["HasError"]
+
+    if !ok {
+        return false
+    }
+
+    c.Flash.ErrorMsg = c.Data["ErrorMessage"].(string)
+    c.Data["Flash"]  = c.Flash
+
+    return hasErr.(bool)
+}
+
 func (c *Context) Handle(status int, title string, err error) {
     if err != nil {
         if macaron.Env != macaron.PROD {
@@ -35,6 +48,13 @@ func (c *Context) Handle(status int, title string, err error) {
     }
 
     c.HTML(status, fmt.Sprintf("status/%d", status))
+}
+
+func (c *Context) HTMLError(status int, message string, name string) {
+    c.Flash.ErrorMsg = message
+    c.Data["Flash"]  = c.Flash
+
+    c.Context.HTML(status, name)
 }
 
 func (c *Context) HTML(status int, name string) {

@@ -11,12 +11,14 @@ import (
     "github.com/go-macaron/session"
     "github.com/go-macaron/csrf"
     "github.com/go-macaron/pongo2"
+    "github.com/go-macaron/binding"
 
     "github.com/zeuxisoo/go-goonui/app/kernels/setting"
     "github.com/zeuxisoo/go-goonui/app/kernels/log"
     "github.com/zeuxisoo/go-goonui/app/kernels/context"
     "github.com/zeuxisoo/go-goonui/app/models"
     "github.com/zeuxisoo/go-goonui/app/routes"
+    "github.com/zeuxisoo/go-goonui/app/forms"
 )
 
 var CmdWeb = cli.Command{
@@ -84,8 +86,13 @@ func runWeb(ctx *cli.Context) error {
     m.Use(context.Contexter())
 
     //
+    bindIgnErr := binding.BindIgnErr
+
+    //
     m.Get("/", routes.Home)
-    m.Post("/signin", csrf.Validate, routes.DoSignIn)
+    m.Post("/signin", csrf.Validate, bindIgnErr(forms.SignInForm{}), routes.DoSignIn)
+
+    m.Get("/dashboard", routes.Dashboard)
 
     //
     addr := fmt.Sprintf("%s:%s", setting.Address, setting.Port)

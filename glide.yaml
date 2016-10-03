@@ -16,3 +16,4 @@ import:
   - bcrypt
 - package: github.com/go-macaron/csrf
 - package: github.com/go-macaron/session
+- package: github.com/go-macaron/binding

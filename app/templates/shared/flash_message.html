@@ -1,0 +1,20 @@
+{% if Flash.ErrorMsg %}
+    <div class="alert alert-danger" role="alert">
+        <strong>Error!</strong>
+        {{ Flash.ErrorMsg | safe }}
+    </div>
+{% endif %}
+
+{% if Flash.SuccessMsg %}
+    <div class="alert alert-success" role="alert">
+        <strong>Success!</strong>
+        {{ Flash.SuccessMsg | safe }}
+    </div>
+{% endif %}
+
+{% if Flash.InfoMsg %}
+    <div class="alert alert-info" role="alert">
+        <strong>Info!</strong>
+        {{ Flash.InfoMsg | safe }}
+    </div>
+{% endif %}
