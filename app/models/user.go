@@ -93,3 +93,19 @@ func SignInUser(username string, password string) (User, error) {
         return user, nil
     }
 }
+
+func FindUserById(userId int64) (User, error) {
+    var user User
+
+    if userId == 0 {
+        return user, nil
+    }else{
+        orm := db.First(&user, userId)
+
+        if err := orm.Error; err != nil {
+            return user, err
+        }else{
+            return user, nil
+        }
+    }
+}

@@ -10,14 +10,19 @@ import (
     "github.com/go-macaron/session"
 
     "github.com/zeuxisoo/go-goonui/app/kernels/setting"
+    "github.com/zeuxisoo/go-goonui/app/models"
 )
 
 type Context struct {
     *macaron.Context
 
-    csrf    csrf.CSRF
-    Flash   *session.Flash
-    Session session.Store
+    csrf        csrf.CSRF
+    Flash       *session.Flash
+    Session     session.Store
+
+    IsSigned    bool
+
+    User        models.User
 }
 
 func (c *Context) HasError() bool {
@@ -61,6 +66,22 @@ func (c *Context) HTML(status int, name string) {
     c.Context.HTML(status, name)
 }
 
+func SignInUserBySession(ctx *macaron.Context, sess session.Store) (models.User, error) {
+    userId := sess.Get("user_id")
+
+    if userId == nil {
+        userId = int64(0)
+    }
+
+    user, err := models.FindUserById(userId.(int64))
+
+    if err != nil {
+        return user, err
+    }else{
+        return user, nil
+    }
+}
+
 func Contexter() macaron.Handler {
     return func(c *macaron.Context, s session.Store, f *session.Flash, x csrf.CSRF) {
         ctx := &Context{
@@ -68,6 +89,14 @@ func Contexter() macaron.Handler {
             csrf   : x,
             Flash  : f,
             Session: s,
+        }
+
+        ctx.User, _ = SignInUserBySession(ctx.Context, ctx.Session)
+
+        if ctx.User.Username != "" {
+            ctx.IsSigned = true
+        }else{
+            ctx.IsSigned = false
         }
 
         ctx.Data["Link"]          = setting.AppUrl + strings.TrimSuffix(ctx.Req.URL.Path, "/")

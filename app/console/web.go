@@ -16,6 +16,7 @@ import (
     "github.com/zeuxisoo/go-goonui/app/kernels/setting"
     "github.com/zeuxisoo/go-goonui/app/kernels/log"
     "github.com/zeuxisoo/go-goonui/app/kernels/context"
+    "github.com/zeuxisoo/go-goonui/app/kernels/middleware"
     "github.com/zeuxisoo/go-goonui/app/models"
     "github.com/zeuxisoo/go-goonui/app/routes"
     "github.com/zeuxisoo/go-goonui/app/forms"
@@ -92,7 +93,7 @@ func runWeb(ctx *cli.Context) error {
     m.Get("/", routes.Home)
     m.Post("/signin", csrf.Validate, bindIgnErr(forms.SignInForm{}), routes.DoSignIn)
 
-    m.Get("/dashboard", routes.Dashboard)
+    m.Get("/dashboard", middleware.RequreSignIn, routes.Dashboard)
 
     //
     addr := fmt.Sprintf("%s:%s", setting.Address, setting.Port)
