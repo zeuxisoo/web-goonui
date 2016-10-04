@@ -18,16 +18,23 @@ func (s *Ssh) SetAuthenticator(authenticator Authenticator) {
     s.authenticator = authenticator
 }
 
-func (s *Ssh) RunCommand(command string) (result string) {
-    sshClient, _  := s.authenticator.SshClient()
-    sshSession, _ := s.createSshSession(sshClient)
+func (s *Ssh) RunCommand(command string) (result string, err error) {
+    if sshClient, err := s.authenticator.SshClient(); err != nil {
+        return "", err
+    }else{
+        sshSession, err := s.createSshSession(sshClient);
 
-    buffer, _ := sshSession.CombinedOutput(command)
+        if err != nil {
+            return "", err
+        }
 
-    sshSession.Close()
-    sshClient.Close()
+        buffer, _ := sshSession.CombinedOutput(command)
 
-    return string(buffer)
+        sshSession.Close()
+        sshClient.Close()
+
+        return string(buffer), nil
+    }
 }
 
 func (s *Ssh) createSshSession(sshClient *ssh.Client) (*ssh.Session, error) {

@@ -49,9 +49,16 @@ func DashboardResult(ctx *context.Context, form forms.DashboardResultForm) {
             sshAgent := ssher.NewSsh()
             sshAgent.SetAuthenticator(authenticator)
 
+            // TODO: implement to run selected commands
+            response, err := sshAgent.RunCommand("host www.yahoo.com.hk")
+
+            if err != nil {
+                response = err.Error()
+            }
+
             result := serverResult{
                 server  : server.Name,
-                response: sshAgent.RunCommand("host www.yahoo.com.hk"),
+                response: response,
             }
 
             results = append(results, result)
