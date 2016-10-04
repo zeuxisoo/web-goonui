@@ -45,6 +45,7 @@ func CreateDatabase() {
     tables = append(
         tables,
         new(User),
+        new(Server),
     )
 
     for _, table := range tables {

@@ -99,6 +99,8 @@ func Contexter() macaron.Handler {
             ctx.IsSigned = false
         }
 
+        ctx.Data["IsSigned"]      = ctx.IsSigned
+        ctx.Data["AppUrl"]        = setting.AppUrl
         ctx.Data["Link"]          = setting.AppUrl + strings.TrimSuffix(ctx.Req.URL.Path, "/")
         ctx.Data["CsrfToken"]     = x.GetToken()
         ctx.Data["CsrfTokenHtml"] = template.HTML(`<input type="hidden" name="_csrf" value="` + x.GetToken() + `">`)

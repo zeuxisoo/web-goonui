@@ -95,6 +95,11 @@ func runWeb(ctx *cli.Context) error {
 
     m.Get("/dashboard", middleware.RequreSignIn, routes.Dashboard)
 
+    m.Group("/server", func() {
+        m.Get("/create", routes.ServerCreate)
+        m.Post("/store", csrf.Validate, bindIgnErr(forms.CreateServerForm{}), routes.ServerStore)
+    }, middleware.RequreSignIn)
+
     //
     addr := fmt.Sprintf("%s:%s", setting.Address, setting.Port)
 
