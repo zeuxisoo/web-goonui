@@ -1,5 +1,5 @@
-hash: 6e575bc164078ceebb9bc39b97f09a23fa9c9bc8cfb2dcda2d7d58bb603333d7
-updated: 2016-10-03T12:24:48.66976574+08:00
+hash: 9924bf29677d063622919c328401ce06c4638069faa58f5a487d6a14df7ca742
+updated: 2016-10-04T17:35:00.859697811+08:00
 imports:
 - name: github.com/codegangsta/cli
   version: d53eb991652b1d438abdd34ce4bfa3ef1539108e
@@ -25,11 +25,20 @@ imports:
   version: 3ec0642a7fb6488f65b06f9040adc67e3990296a
 - name: github.com/Unknwon/com
   version: 28b053d5a2923b87ce8c5a08f3af779894a72758
+- name: github.com/zeuxisoo/go-goon
+  version: 276c442d85025421f7b0770538bf886f736d193f
+  subpackages:
+  - setting
+  - ssh/contract
 - name: golang.org/x/crypto
-  version: 84e98f45760e87786b7f24603b8166a6fa09811d
+  version: bde08f269ed27dc9a9c105465110825e04ab3d41
   subpackages:
   - bcrypt
   - blowfish
+  - curve25519
+  - ed25519
+  - ed25519/internal/edwards25519
+  - ssh
 - name: golang.org/x/sys
   version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
   subpackages:

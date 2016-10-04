@@ -94,6 +94,7 @@ func runWeb(ctx *cli.Context) error {
     m.Post("/signin", csrf.Validate, bindIgnErr(forms.SignInForm{}), routes.DoSignIn)
 
     m.Get("/dashboard", middleware.RequreSignIn, routes.Dashboard)
+    m.Post("/dashboard/result", middleware.RequreSignIn, csrf.Validate, bindIgnErr(forms.DashboardResultForm{}), routes.DashboardResult)
 
     m.Group("/server", func() {
         m.Get("/create", routes.ServerCreate)

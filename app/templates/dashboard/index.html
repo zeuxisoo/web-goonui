@@ -2,6 +2,47 @@
 
 {% block container %}
     <div id="dashboard-index">
-        Dashboard Index
+        <h3>Dashboard</h3>
+        <hr>
+        {% include "../shared/flash_message.html" %}
+        <form class="form-horizontal" method="post" action="{{ AppUrl }}dashboard/result">
+            {{ CsrfTokenHtml | safe }}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <select id="command" name="command" class="form-control">
+                        <option value="ping">ping</option>
+                        <option value="host">host</option>
+                        <option value="traceroute">traceroute</option>
+                        <option value="mtr">mtr</option>
+                        <option value="nslookup">nslookup</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Target IP / Domain</div>
+                <div class="panel-body">
+                    <input type="text" name="target_ip" id="target_ip" class="form-control" placeholder="54.175.219.8">
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">List of server</div>
+                <ul class="list-group">
+                    {% for server in Servers %}
+                        <li class="list-group-item">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <input type="checkbox" name="servers" value="{{ server.ID }}">
+                                </span>
+                                <input type="text" class="form-control" readonly="readonly" value="{{ server.Name }}">
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <button type="submit" class="btn btn-info btn-md">Run</button>
+        </form>
     </div>
 {% endblock %}

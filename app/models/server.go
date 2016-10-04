@@ -23,3 +23,27 @@ func CreateServer(server *Server) error {
 
     return nil
 }
+
+func FindAllServers() ([]Server, error) {
+    var servers []Server
+
+    orm := db.Find(&servers)
+
+    if err := orm.Error; err != nil {
+        return servers, err
+    }else{
+        return servers, nil
+    }
+}
+
+func FindAllServersByIds(ids []string) ([]Server, error) {
+    var servers []Server
+
+    orm := db.Where("id in (?)", ids).Find(&servers)
+
+    if err := orm.Error; err != nil {
+        return servers, err
+    }else{
+        return servers, nil
+    }
+}

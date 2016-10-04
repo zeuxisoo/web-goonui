@@ -1,0 +1,23 @@
+{% extends "../layout/frontend.html" %}
+
+{% block container %}
+    <div id="dashboard-result">
+        <h3>Dashboard Result</h3>
+        <hr>
+        {% include "../shared/flash_message.html" %}
+        <div class="panel panel-default">
+            <div class="panel-heading">Command</div>
+            <div class="panel-body">
+                {{ Command }}
+            </div>
+        </div>
+        {% for result in Results %}
+            <div class="panel panel-default">
+                <div class="panel-heading">{{ result.server }}</div>
+                <div class="panel-body">
+                    {{ result.response | linebreaksbr | safe }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
