@@ -100,6 +100,7 @@ func runWeb(ctx *cli.Context) error {
         m.Get("/", routes.ServerIndex)
         m.Get("/create", routes.ServerCreate)
         m.Post("/store", csrf.Validate, bindIgnErr(forms.CreateServerForm{}), routes.ServerStore)
+        m.Get("/edit/:serverid", routes.ServerEdit)
     }, middleware.RequreSignIn)
 
     //

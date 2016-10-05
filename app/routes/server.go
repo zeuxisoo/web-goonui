@@ -46,3 +46,17 @@ func ServerStore(ctx *context.Context, form forms.CreateServerForm) {
         ctx.HTML(200, "server/create")
     }
 }
+
+func ServerEdit(ctx *context.Context) {
+    server, err := models.FindServerById(ctx.ParamsInt64(":serverid"))
+
+    if err != nil {
+        ctx.HTMLError(200, err.Error(), "server/create")
+    }else if server.Name == "" {
+        ctx.HTMLError(200, "The server information incorrect", "server/create")
+    }else{
+        ctx.Data["Server"] = server
+
+        ctx.HTML(200, "server/edit")
+    }
+}

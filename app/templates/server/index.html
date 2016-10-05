@@ -30,7 +30,7 @@
                                     <td>{{ server.Username }}</td>
                                     <td>{{ server.AuthMethod }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-default btn-xs">Edit</a>
+                                        <a href="{{ AppUrl }}server/edit/{{ server.ID }}" class="btn btn-default btn-xs">Edit</a>
                                     </td>
                                 </tr>
                             {% endfor %}

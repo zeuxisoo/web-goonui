@@ -47,3 +47,19 @@ func FindAllServersByIds(ids []string) ([]Server, error) {
         return servers, nil
     }
 }
+
+func FindServerById(serverId int64) (Server, error) {
+    var server Server
+
+    if serverId == 0 {
+        return server, nil
+    }else{
+        orm := db.First(&server, serverId)
+
+        if err := orm.Error; err != nil {
+            return server, err
+        }else{
+            return server, nil
+        }
+    }
+}
