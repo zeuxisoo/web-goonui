@@ -1,7 +1,9 @@
 package routes
 
 import (
+    "fmt"
     "strconv"
+    "strings"
 
     "github.com/zeuxisoo/go-goonui/app/kernels/context"
     "github.com/zeuxisoo/go-goonui/app/kernels/ssher"
@@ -33,6 +35,22 @@ func DashboardResult(ctx *context.Context, form forms.DashboardResultForm) {
         ctx.HTMLError(200, err.Error(), "dashboard/index")
     }else{
         var results []serverResult
+        var command string
+
+        switch strings.ToLower(form.Command) {
+            case "ping":
+                command = fmt.Sprintf("ping -c 4 -t 15 %s", form.TargetIp)
+            case "host":
+                command = fmt.Sprintf("host %s", form.TargetIp)
+            case "traceroute":
+                command = fmt.Sprintf("traceroute -n -m 30 %s", form.TargetIp)
+            case "mtr":
+                command = fmt.Sprintf("mtr -rw %s", form.TargetIp)
+            case "nslookup":
+                command = fmt.Sprintf("nslookup %s", form.TargetIp)
+            default:
+                command = fmt.Sprintf("Cannot find related command: %s", form.TargetIp)
+        }
 
         for _, server := range servers {
             port, _ := strconv.Atoi(server.Port)
@@ -49,8 +67,7 @@ func DashboardResult(ctx *context.Context, form forms.DashboardResultForm) {
             sshAgent := ssher.NewSsh()
             sshAgent.SetAuthenticator(authenticator)
 
-            // TODO: implement to run selected commands
-            response, err := sshAgent.RunCommand("host www.yahoo.com.hk")
+            response, err := sshAgent.RunCommand(command)
 
             if err != nil {
                 response = err.Error()
@@ -64,7 +81,7 @@ func DashboardResult(ctx *context.Context, form forms.DashboardResultForm) {
             results = append(results, result)
         }
 
-        ctx.Data["Command"] = form.Command
+        ctx.Data["Command"] = command
         ctx.Data["Results"] = results
 
         ctx.HTML(200, "dashboard/result")
