@@ -60,3 +60,36 @@ func ServerEdit(ctx *context.Context) {
         ctx.HTML(200, "server/edit")
     }
 }
+
+func ServerUpdate(ctx *context.Context, form forms.EditServerForm) {
+    server, err := models.FindServerById(ctx.ParamsInt64(":serverid"))
+
+    if err != nil {
+        ctx.HTMLError(200, err.Error(), "server/create")
+    }else if server.Name == "" {
+        ctx.HTMLError(200, "The server information incorrect", "server/create")
+    }else if ctx.HasError() {
+        ctx.Data["Server"] = server
+        ctx.HTML(200, "server/edit")
+    }else{
+        server.Name       = form.Name
+        server.Host       = form.Host
+        server.Port       = form.Port
+        server.Username   = form.Username
+        server.Password   = form.Password
+        server.AuthMethod = form.AuthMethod
+
+        err := models.UpdateServerById(&server)
+
+        if err != nil {
+            ctx.Flash.ErrorMsg = "Cannot update server!"
+            ctx.Data["Flash"]  = ctx.Flash
+        }else{
+            ctx.Flash.SuccessMsg = "Server Updated!"
+            ctx.Data["Flash"]    = ctx.Flash
+        }
+
+        ctx.Data["Server"] = server
+        ctx.HTML(200, "server/edit")
+    }
+}

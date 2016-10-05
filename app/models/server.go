@@ -63,3 +63,13 @@ func FindServerById(serverId int64) (Server, error) {
         }
     }
 }
+
+func UpdateServerById(server *Server) error {
+    orm := db.Save(&server)
+
+    if err := orm.Error; err != nil {
+        return err
+    }else{
+        return nil
+    }
+}
