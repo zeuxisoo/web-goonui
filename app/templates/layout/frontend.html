@@ -23,11 +23,11 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     {% if IsSigned %}
-                        <li><a href="/dashboard">Home</a></li>
-                        <li><a href="/server">Server</a></li>
-                        <li><a href="/server/create">Create Server</a></li>
+                        <li><a href="{{ AppUrl }}dashboard">Home</a></li>
+                        <li><a href="{{ AppUrl }}server">Server</a></li>
+                        <li><a href="{{ AppUrl }}server/create">Create Server</a></li>
                     {% else %}
-                        <li><a href="/">Home</a></li>
+                        <li><a href="{{ AppUrl }}">Home</a></li>
                     {% endif %}
                 </ul>
             </div>
