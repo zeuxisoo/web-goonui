@@ -1,21 +1,28 @@
 package routes
 
 import (
-    "fmt"
-
     "github.com/zeuxisoo/go-goonui/app/kernels/context"
     "github.com/zeuxisoo/go-goonui/app/forms"
     "github.com/zeuxisoo/go-goonui/app/models"
 )
+
+func ServerIndex(ctx *context.Context) {
+    servers, err := models.FindAllServers()
+
+    if err != nil {
+        ctx.HTMLError(200, err.Error(), "server/index")
+    }else{
+        ctx.Data["Servers"] = servers
+
+        ctx.HTML(200, "server/index")
+    }
+}
 
 func ServerCreate(ctx *context.Context) {
     ctx.HTML(200, "server/create")
 }
 
 func ServerStore(ctx *context.Context, form forms.CreateServerForm) {
-    fmt.Printf("Name=%s, Host=%s, Port=%s, Username=%s, Password=%s, AuthMethod=%s\n",
-        form.Name, form.Host, form.Port, form.Username, form.Password, form.AuthMethod)
-
     if ctx.HasError() {
         ctx.HTML(200, "server/create")
         return

@@ -1,0 +1,43 @@
+{% extends "../layout/frontend.html" %}
+
+{% block container %}
+    <div id="server-index">
+        <h3>Server List</h3>
+        <hr>
+        {% include "../shared/flash_message.html" %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Host</th>
+                                <th>Port</th>
+                                <th>User</th>
+                                <th>Auth Method</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for server in Servers %}
+                                <tr>
+                                    <td>{{ server.ID }}</td>
+                                    <td>{{ server.Name }}</td>
+                                    <td>{{ server.Host }}</td>
+                                    <td>{{ server.Port }}</td>
+                                    <td>{{ server.Username }}</td>
+                                    <td>{{ server.AuthMethod }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-default btn-xs">Edit</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
